@@ -11,7 +11,7 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup = new FormGroup({
 
     email: new FormControl(null, {
-      validators:[Validators.required, Validators.email]
+      validators:[Validators.required, Validators.email],
     }),
     password: new FormControl(null,{
       validators:[Validators.required, Validators.minLength(6)]
@@ -22,6 +22,9 @@ export class LoginPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // setTimeout(()=> {
+    //   this.loginForm.setValue({"email": 'ana@flavia', "password": '123456'})
+    // }, 3000);
   }
 
   public onSubmit(){
