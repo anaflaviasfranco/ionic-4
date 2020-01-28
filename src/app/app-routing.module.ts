@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -9,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: 'tasks',
-    loadChildren: () => import('./pages/tasks/tasks.module').then( m => m.TasksPageModule)
+    loadChildren: () => import('./pages/tasks/tasks.module').then( m => m.TasksPageModule),
+    canActivate: [AuthGuard]
   },
 ];
 

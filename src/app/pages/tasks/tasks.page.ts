@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-tasks',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    // private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
+
+  // public logout() {
+  //   this.authService.logout
+
+  // }
 
 }
