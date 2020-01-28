@@ -24,13 +24,15 @@
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
           <ion-text color="danger" class="ion-margin-start" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
-              <small>O campo de senha deve ter no mínimo 6 caracteres</small>
+              <small>O campo de senha deve ter no mínimo 3 caracteres</small>
             </ion-text>
         </ion-col>
       </ion-row>
       <ion-row  class="ion-justify-content-center">
         <ion-button (click)="onSubmit()" [disabled]="loginForm.invalid" >
-          Enviar
+          {{textButton}}
+          <ion-spinner name="circles" class="ion-margin-start" *ngIf="isLoading" ></ion-spinner>
+          <ion-icon name="checkmark-circle-outline" class="ion-margin-start" *ngIf="isSuccess" ></ion-icon>
         </ion-button>
       </ion-row>
   </form>
