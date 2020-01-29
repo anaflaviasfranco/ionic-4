@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Tarefas</ion-title>
-    <ion-button color="light" slot="end" class="ion-margin" fill="outline" (click)="onLogout()"> Logout </ion-button>
+    <ion-title class="justify-content-center">Tarefas</ion-title>
+    <ion-button color="light" slot="end" class="ion-margin" fill="outline" (click)="logout()"> Logout </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -10,9 +10,31 @@
       <ion-card-header>
         <ion-card-title>Nova Tarefa</ion-card-title>
       </ion-card-header>
-      <ion-card-content>
 
+      <ion-card-content>
+        <form [formGroup]="formTask">
+            <ion-item>
+              <ion-label position="floating">Descrição</ion-label>
+              <ion-input formControlName="description"></ion-input>
+            </ion-item>            
+            <ion-item>
+              <ion-label position="floating">Prioridade</ion-label>
+                <ion-select placeholder="Prioridade" formControlName="priority">
+                  <ion-select-option value="high">Alta</ion-select-option>
+                  <ion-select-option value="medium">Média</ion-select-option>
+                  <ion-select-option value="low">Baixa</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-row class="ion-justify-content-center">
+              <ion-button color="primary" (click)="onSubmitForm()" [disabled]="formTask.invalid">
+                Adicionar
+                <ion-spinner name="circles" class="ion-margin-start" *ngIf="isLoading"></ion-spinner>
+              </ion-button>
+            </ion-row>
+        </form>
       </ion-card-content>
+
     </ion-card>
 
     <ion-card>

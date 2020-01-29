@@ -24,23 +24,23 @@ export class TasksService {
       return ;
     }
 
-    const userTasks: AngularFirestoreDocument<any> = this.afStore.doc(`${DB_PATH_TASKS}/${this.user.uid}`);
+    const userTasks: AngularFirestoreDocument<any> = this.afStore.doc(`${this.DB_PATH_TASKS}/${this.user.uid}`);
     return userTasks.collection('tasks').add(task);
 
   }
 
-  public delete(task: Tasks): Promise<any> {
+  // public delete(task: Tasks): Promise<any> {
 
-  }
+  // }
 
-  public update(task: Tasks): Promise<any> {
+  // public update(task: Tasks): Promise<any> {
 
-  }
+  // }
 
-  public getAll(): Observable<any> {
+  // public getAll(): Observable<any> {
 
 
-  }
+  // }
 
 
 
