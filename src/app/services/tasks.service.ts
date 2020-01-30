@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Tasks } from '../interfaces/tasks';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +38,18 @@ export class TasksService {
 
   // }
 
-  // public getAll(): Observable<any> {
+  public getAll(): Observable<any> {
+    if(!this.user) {
+      return ;
+    }
 
-
-  // }
-
-
-
+    const allTasks: AngularFirestoreDocument<any> = this.afStore.doc(`${this.DB_PATH_TASKS}/${this.user.uid}`);
+    return allTasks.collection('tasks').get().pipe(
+      map(res => res.docs.map (doc => {
+        const id = doc.id;
+        const data = doc.data();
+        return {id, ...data}
+      }))
+    );
+  }
 }

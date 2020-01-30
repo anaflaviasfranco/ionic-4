@@ -41,7 +41,19 @@
       <ion-card-header>
         <ion-card-subtitle>Minhas Tarefas</ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content></ion-card-content>
+      <ion-card-content>
+        <ion-list>
+          <ion-item-sliding *ngFor="let task of (task$ | async)">
+            <app-task-item-list [task]="task" ></app-task-item-list>
+            <ion-item-options side="end">
+              <ion-item-option (click)="onDeleteTask(task)" color="danger" large>
+                <ion-icon name="trash" class="task--icon"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+
+      </ion-card-content>
     </ion-card>
 
 </ion-content>

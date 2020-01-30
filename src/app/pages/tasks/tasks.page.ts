@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Tasks } from 'src/app/interfaces/tasks';
 import { TasksService } from 'src/app/services/tasks.service';
 import { ToastController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
+import { Auth } from 'src/app/interfaces/auth';
 
 @Component({
   selector: 'app-tasks',
@@ -12,8 +14,11 @@ import { ToastController } from '@ionic/angular';
 })
 export class TasksPage implements OnInit {
 
+  public task$: Observable<Tasks>;
+  public  user: Auth;
   public isLoading = false;
-
+  private authSubscription: Subscription
+  
   public formTask: FormGroup = new FormGroup({
     description: new FormControl(null, [Validators.required, Validators.minLength(10)]),
     priority: new FormControl(null, [Validators.required])
@@ -22,13 +27,23 @@ export class TasksPage implements OnInit {
   constructor(
     private authService: AuthService,
     private tasksService: TasksService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    
 
     ) { }
 
   ngOnInit() {
+
+    this.authService.user$.subscribe( user => {
+      this.user = user;
+      this.upDateAll();
+    })
   }
-  
+
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
+  }
+    // metodos privados
   private async presentToast (msg: string, color: string) {
     const toast = await this.toastController.create({
       message: msg,
@@ -47,7 +62,11 @@ export class TasksPage implements OnInit {
 
   private upDateAll(): void {
 
+    this.task$ = this.tasksService.getAll();
+
   }
+
+  //metodos publicos
 
   public logout() {
     this.authService.logout();
