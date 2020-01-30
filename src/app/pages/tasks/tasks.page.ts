@@ -94,4 +94,13 @@ export class TasksPage implements OnInit {
     })
   }
 
+  public onDeleteTask(task: Tasks): void {
+    this.tasksService.delete(task).then(res => {
+      this.presentToast('Tarefa deletada com sucesso!', 'success');
+      this.upDateAll();
+    }).catch(error => {
+      this.presentToast(error.message, 'danger');
+    });
+  }
+
 }

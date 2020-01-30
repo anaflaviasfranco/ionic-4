@@ -30,13 +30,22 @@ export class TasksService {
 
   }
 
-  // public delete(task: Tasks): Promise<any> {
+  public delete(task: Tasks): Promise<any> {
+    const docTask: AngularFirestoreDocument<any> = this.afStore.doc(`/task/${this.user.uid}/task/${task.id}`);
+    return docTask.delete();
 
-  // }
 
-  // public update(task: Tasks): Promise<any> {
+  }
 
-  // }
+  public update(task: Tasks): Promise<any> {
+    if(!this.user) {
+      return ;
+    }
+
+    const docTask: AngularFirestoreDocument<any> = this.afStore.doc(`/task/${this.user.id}/tasks/${task.id}`);
+    return docTask.update(task);
+
+  }
 
   public getAll(): Observable<any> {
     if(!this.user) {
