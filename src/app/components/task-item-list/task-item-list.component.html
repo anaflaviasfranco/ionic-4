@@ -4,5 +4,5 @@
     <ion-badge [color]="task.priority | translatePriority: true" class="ion-margin" >
      {{task.priority | translatePriority}}
     </ion-badge>
-    <ion-toggle slot="end" color="secondary" [checked]="task.todo" (ionChange)="onChangeToggle($event, task.id)" ></ion-toggle>
+    <ion-toggle slot="end" color="primary" [checked]="task.todo" (ionChange)="onChangeToggle($event, task.id)" ></ion-toggle>
 </ion-item>
