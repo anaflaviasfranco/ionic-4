@@ -8,6 +8,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Auth } from 'src/app/interfaces/auth';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from 'src/app/services/global.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -25,13 +26,15 @@ export class TasksPage implements OnInit {
     description: new FormControl(null, [Validators.required, Validators.minLength(10)]),
     priority: new FormControl(null, [Validators.required])
   });
+ 
 
   constructor(
     private authService: AuthService,
     private tasksService: TasksService,
     private toastController: ToastController,
     private translate: TranslateService,
-    private global: GlobalService
+    private global: GlobalService,
+    private router: Router
 
     ) {
       this.translate.setDefaultLang(this.global.DefaultLanguage);
@@ -76,8 +79,11 @@ export class TasksPage implements OnInit {
 
   //metodos publicos
 
-  public logout() {
-    this.authService.logout();
+  public onLogout(): void {
+    this.authService.logout().then( user => {
+      console.log('logout ', user);
+      this.router.navigateByUrl('/login');
+    });
   }
 
 
