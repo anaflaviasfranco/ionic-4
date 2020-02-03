@@ -36,7 +36,7 @@ import { ColorPriorityPipe } from 'src/app/pipes/color-priority.pipe';
     TasksPage,
     TaskItemListComponent,
     ColorPriorityPipe,
-    SortByPipe
+    SortByPipe,
   ],
   providers: [
     GlobalService

@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
   <ion-title  class="justify-content-center">{{'tasks' | translate}}</ion-title>
+
     <ion-button color="light" slot="end" class="ion-margin" fill="outline" (click)="logout()"> Logout </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -10,32 +11,28 @@
       <ion-card-header>
         <ion-card-title>
           {{'newtask' | translate}}
-        <ion-select [placeholder]="'language' | translate" name="language" (ionChange)="changeLanguage($event)">
-        <ion-select-option value="en">{{'english' | translate}}</ion-select-option>
-        <ion-select-option value="pt">{{'portuguese' | translate}}</ion-select-option>
-          </ion-select>
         </ion-card-title>
-        {{'the book is on the table'| translate}}
+        
       </ion-card-header>
 
       <ion-card-content>
         <form [formGroup]="formTask">
             <ion-item>
-              <ion-label position="floating">Descrição</ion-label>
+            <ion-label position="floating">{{'description' | translate}}</ion-label>
               <ion-input formControlName="description"></ion-input>
             </ion-item>            
             <ion-item>
-              <ion-label position="floating">Prioridade</ion-label>
-                <ion-select placeholder="Prioridade" formControlName="priority">
-                  <ion-select-option value="high">Alta</ion-select-option>
-                  <ion-select-option value="medium">Média</ion-select-option>
-                  <ion-select-option value="low">Baixa</ion-select-option>
+            <ion-label position="floating">{{'priority' | translate}}</ion-label>
+                <ion-select [placeholder]="'priority' | translate" formControlName="priority">
+                <ion-select-option value="high">{{'high' | translate}}</ion-select-option>
+                  <ion-select-option value="medium">{{'medium' | translate}}</ion-select-option>
+                <ion-select-option value="low">{{'low' | translate}}</ion-select-option>
                 </ion-select>
             </ion-item>
 
             <ion-row class="ion-justify-content-center">
               <ion-button color="primary" (click)="onSubmitForm()" [disabled]="formTask.invalid">
-                Adicionar
+                {{'add'  | translate}}
                 <ion-spinner name="circles" class="ion-margin-start" *ngIf="isLoading"></ion-spinner>
               </ion-button>
             </ion-row>
@@ -46,7 +43,7 @@
 
     <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>Minhas Tarefas</ion-card-subtitle>
+      <ion-card-subtitle>{{"mytasks" | translate}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         <ion-list>
@@ -64,3 +61,10 @@
     </ion-card>
 
 </ion-content>
+
+<ion-footer>
+  <ion-select [placeholder]="'language' | translate" name="language" (ionChange)="changeLanguage($event)">
+    <ion-select-option value="en">{{'english' | translate}}</ion-select-option>
+    <ion-select-option value="pt">{{'portuguese' | translate}}</ion-select-option>
+  </ion-select>
+</ion-footer>

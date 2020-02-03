@@ -4,5 +4,13 @@
 	"newtask": "Nova Tarefa",
 	"portuguese": "Portugues",
 	"tasks": "Tarefas",
-	"the book is on the table": "O livro está sobre a mesa"
+	"description": "Descrição",
+	"priority": "Prioridade",
+	"high": "Alta",
+	"medium": "Média",
+	"low": "Baixa",
+	"add": "Adicionar",
+	"mytasks": "Minhas  Tarefas",
+	"password": "Senha",
+	"btn-send": "Enviar"
 }

@@ -4,5 +4,13 @@
 	"newtask": "New Task",
 	"portuguese": "Portuguese",
 	"tasks": "Tasks",
-	"the book is on the table": "the book is on the table"
+	"description": "Description",
+	"priority": "Priority",
+	"high": "High",
+	"medium": "Medium",
+	"low": "Low",
+	"add": "Add",
+	"mytasks": "My Tasks",
+	"password": "Password",
+	"btn-send": "Send"
 }

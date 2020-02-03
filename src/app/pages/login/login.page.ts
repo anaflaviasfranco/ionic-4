@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-login',
@@ -22,15 +24,20 @@ export class LoginPage implements OnInit {
 
   });
 
-  public textButton = 'Enviar';
+  // public textButton = 'Enviar';
   public isLoading: boolean;
   public isSuccess: boolean;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    public toastController: ToastController
-  ) { }
+    public toastController: ToastController,
+    private translate: TranslateService,
+    private global: GlobalService
+  ) { 
+    this.translate.setDefaultLang(this.global.DefaultLanguage);
+
+  }
 
   ngOnInit() {
     // setTimeout(()=> {
@@ -57,7 +64,7 @@ export class LoginPage implements OnInit {
   public onSubmit(){
     console.log('form login', this.loginForm.value);
     this.isLoading = true;
-    this.textButton = 'Enviando Dados';
+    // this.textButton = 'Enviando Dados';
 
     //constante é uma variavel que nao pode ser mudada
     const email: string = this.loginForm.get('email').value;
@@ -72,6 +79,11 @@ export class LoginPage implements OnInit {
     }).finally(() => {
       this.isLoading = false;
     })
+  }
+
+  changeLanguage(ev) {
+    this.global.DefaultLanguage = ev.target.value;
+    this.translate.setDefaultLang(this.global.DefaultLanguage);
   }
 
 }

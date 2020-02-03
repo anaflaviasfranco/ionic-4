@@ -20,7 +20,7 @@
     <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Senha</ion-label>
+          <ion-label position="floating">{{"password" | translate}}</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
           <ion-text color="danger" class="ion-margin-start" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
@@ -30,10 +30,17 @@
       </ion-row>
       <ion-row  class="ion-justify-content-center">
         <ion-button (click)="onSubmit()" [disabled]="loginForm.invalid" >
-          {{textButton}}
+          {{"btn-send" | translate}}
           <ion-spinner name="circles" class="ion-margin-start" *ngIf="isLoading" ></ion-spinner>
           <ion-icon name="checkmark-circle-outline" class="ion-margin-start" *ngIf="isSuccess" ></ion-icon>
         </ion-button>
       </ion-row>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-select [placeholder]="'language' | translate" name="language" (ionChange)="changeLanguage($event)">
+    <ion-select-option value="en">{{'english' | translate}}</ion-select-option>
+    <ion-select-option value="pt">{{'portuguese' | translate}}</ion-select-option>
+  </ion-select>
+</ion-footer>
