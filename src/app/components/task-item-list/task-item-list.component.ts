@@ -20,7 +20,9 @@ export class TaskItemListComponent implements OnInit {
   ngOnInit() {}
 
   public onChangeToggle(event: CustomEvent, taskID: string): void{
-
+    if(this.disabled){
+      return;
+    }
     this.disabled = true;
     this.task.todo = event.detail.checked;
     this.tasksService.update(this.task).then(task => {

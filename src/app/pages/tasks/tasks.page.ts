@@ -6,6 +6,8 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { ToastController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { Auth } from 'src/app/interfaces/auth';
+import { TranslateService } from '@ngx-translate/core';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-tasks',
@@ -28,9 +30,12 @@ export class TasksPage implements OnInit {
     private authService: AuthService,
     private tasksService: TasksService,
     private toastController: ToastController,
-    
+    private translate: TranslateService,
+    private global: GlobalService
 
-    ) { }
+    ) {
+      this.translate.setDefaultLang(this.global.DefaultLanguage);
+     }
 
   ngOnInit() {
 
@@ -45,19 +50,22 @@ export class TasksPage implements OnInit {
   }
     // metodos privados
   private async presentToast (msg: string, color: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      //duration: 2000,
-      position: 'top',
-      color,
-      buttons: [
-        {
-          text: 'Fechar',
-          role: 'cancel'
-        }
-      ]
-    });
-    toast.present();
+   const tra = await this.translate.getTranslation(this.global.DefaultLanguage).toPromise();
+
+      const toast = await this.toastController.create({
+        message: msg,
+        duration: 2000,
+        position: 'top',
+        color,
+        buttons: [
+          {
+            text: tra.tasks.toastClose,
+            role: 'cancel'
+          }
+        ]
+      });
+      toast.present();
+    
   }
 
   private upDateAll(): void {
@@ -87,6 +95,7 @@ export class TasksPage implements OnInit {
       this.isLoading = false;
       this.presentToast('Tarefa criada com sucesso', 'success');
       this.upDateAll();
+      this.formTask.reset();
     }).catch(error => {
       this.presentToast(error.message, 'danger');
     }).finally(() => {
@@ -103,4 +112,17 @@ export class TasksPage implements OnInit {
     });
   }
 
+  // setLanguage() {
+  //   if(this.global.DefaultLanguage == 'pt'){
+  //     this.global.DefaultLanguage = 'en'
+  //   }else {
+  //     this.global.DefaultLanguage = 'pt'
+  //   }
+  //   this.translate.setDefaultLang(this.global.DefaultLanguage)
+  // }
+
+  changeLanguage(ev) {
+    this.global.DefaultLanguage = ev.target.value;
+    this.translate.setDefaultLang(this.global.DefaultLanguage);
+  }
 }

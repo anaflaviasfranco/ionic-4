@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title class="justify-content-center">Tarefas</ion-title>
+  <ion-title  class="justify-content-center">{{'tasks' | translate}}</ion-title>
     <ion-button color="light" slot="end" class="ion-margin" fill="outline" (click)="logout()"> Logout </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -8,7 +8,14 @@
 <ion-content>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Nova Tarefa</ion-card-title>
+        <ion-card-title>
+          {{'newtask' | translate}}
+        <ion-select [placeholder]="'language' | translate" name="language" (ionChange)="changeLanguage($event)">
+        <ion-select-option value="en">{{'english' | translate}}</ion-select-option>
+        <ion-select-option value="pt">{{'portuguese' | translate}}</ion-select-option>
+          </ion-select>
+        </ion-card-title>
+        {{'the book is on the table'| translate}}
       </ion-card-header>
 
       <ion-card-content>

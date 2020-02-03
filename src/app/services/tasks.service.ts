@@ -31,7 +31,7 @@ export class TasksService {
   }
 
   public delete(task: Tasks): Promise<any> {
-    const docTask: AngularFirestoreDocument<any> = this.afStore.doc(`/task/${this.user.uid}/task/${task.id}`);
+    const docTask: AngularFirestoreDocument<any> = this.afStore.doc(`/task/${this.user.uid}/tasks/${task.id}`);
     return docTask.delete();
 
 
@@ -42,7 +42,7 @@ export class TasksService {
       return ;
     }
 
-    const docTask: AngularFirestoreDocument<any> = this.afStore.doc(`/task/${this.user.id}/tasks/${task.id}`);
+    const docTask: AngularFirestoreDocument<any> = this.afStore.doc(`/task/${this.user.uid}/tasks/${task.id}`);
     return docTask.update(task);
 
   }
